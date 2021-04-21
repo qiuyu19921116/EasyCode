@@ -2,22 +2,24 @@
 $!define
 
 ##设置表后缀（宏定义）
-#setTableSuffix("Dao")
+#setTableSuffix("Mapper")
 
 ##保存文件（宏定义）
-#save("/dao", "Dao.java")
+#save("/mapper", "Mapper.java")
 
 ##包路径（宏定义）
-#setPackageSuffix("dao")
+#setPackageSuffix("mapper")
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import $!{tableInfo.savePackageName}.entity.$!tableInfo.name;
+import org.apache.ibatis.annotations.Mapper;
 
 ##表注释（宏定义）
 #tableComment("表数据库访问层")
+@Mapper
 public interface $!{tableName} extends BaseMapper<$!tableInfo.name> {
 
 /**
