@@ -233,7 +233,7 @@ public class Settings implements PersistentStateComponent<Settings> {
         oldTemplateGroup.setName(newName);
         // 保存
         settings.getTemplateGroupMap().put(newName, oldTemplateGroup);
-        // 覆盖
+        // 覆盖啊
         settings.getTemplateGroupMap().replace(DEFAULT_NAME, templateGroupMap.get(DEFAULT_NAME));
 
 
