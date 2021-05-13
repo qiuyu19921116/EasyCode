@@ -130,6 +130,15 @@ public class Settings implements PersistentStateComponent<Settings> {
         typeMapperList.add(new TypeMapper("datetime", "java.util.Date"));
         typeMapperList.add(new TypeMapper("timestamp", "java.util.Date"));
         typeMapperList.add(new TypeMapper("boolean", "java.lang.Boolean"));
+        typeMapperList.add(new TypeMapper("bigint(\\(\\d+\\))? unsigned", "java.lang.Long"));
+        typeMapperList.add(new TypeMapper("tinyint(\\(\\d+\\))? unsigned", "java.lang.Integer"));
+        typeMapperList.add(new TypeMapper("datetime(\\(\\d+\\))?", "java.time.LocalDateTime"));
+        typeMapperList.add(new TypeMapper("json", "com.alibaba.fastjson.JSONObject"));
+        typeMapperList.add(new TypeMapper("clob", "jjava.lang.String"));
+        typeMapperList.add(new TypeMapper("smallint(\\(\\d+\\))?", "java.lang.Integer"));
+        typeMapperList.add(new TypeMapper("smallint(\\(\\d+\\))? unsigned", "java.lang.Long"));
+        typeMapperList.add(new TypeMapper("mediumint(\\(\\d+\\))? unsigned", "java.lang.Long"));
+        typeMapperList.add(new TypeMapper("mediumint(\\(\\d+\\))?", "java.lang.Integer"));
         typeMapperGroup.setName(DEFAULT_NAME);
         typeMapperGroup.setElementList(typeMapperList);
         typeMapperGroupMap.put(DEFAULT_NAME, typeMapperGroup);
