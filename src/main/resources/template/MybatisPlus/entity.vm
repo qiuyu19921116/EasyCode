@@ -11,31 +11,33 @@ $!define
 $!autoImport
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 ##表注释（宏定义）
 #tableComment("表实体类")
 @SuppressWarnings("serial")
+@Data
 public class $!{tableInfo.name} extends Model<$!{tableInfo.name}> {
-#foreach($column in $tableInfo.fullColumn)
-    #if(${column.comment})//${column.comment}#end
-
+#foreach($column in $tableInfo.fullColumn)  
+    #if($velocityCount==1)
+    @TableId(type = IdType.INPUT)
     private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
-#end
+    #else
 
-#foreach($column in $tableInfo.fullColumn)
-#getSetMethod($column)
-#end
-
-#foreach($column in $tableInfo.pkColumn)
-    /**
-     * 获取主键值
-     *
-     * @return 主键值
-     */
-    @Override
-    protected Serializable pkVal() {
-        return this.$!column.name;
-    }
-    #break
+        #if($!{column.name.equals("isDeleted")})
+        @ApiModelProperty(value = "${column.comment}")
+        @TableLogic   
+        private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+        #else
+             @ApiModelProperty(value = "${column.comment}")
+            private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+            #end
+    
+        #end
 #end
 }
